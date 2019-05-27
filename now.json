@@ -1,0 +1,100 @@
+{
+  "version": 2,
+  "name": "social-stream",
+  "public": false,
+  "regions": ["iad1"],
+  "builds": [
+    {
+      "src": "/server/**/*.js",
+      "use": "@now/node-server",
+      "config": { "maxLambdaSize": "40mb" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "status": 301,
+      "headers": { "Location": "https://jake101.com" }
+    },
+    {
+      "src": "/foursquare/(.*)",
+      "dest": "/server/api/foursquare.js","headers": {
+        "cache-control": "s-maxage=7200, stale-while-revalidate"
+      }
+      
+    },
+    {
+      "src": "/twitter/(.*)",
+      "dest": "/server/api/twitter.js","headers": {
+        "cache-control": "s-maxage=7200, stale-while-revalidate"
+      }
+      
+    },
+    {
+      "src": "/stream/(.*)",
+      "dest": "/server/api/stream.js","headers": {
+        "cache-control": "s-maxage=7200, stale-while-revalidate"
+      }
+      
+    },
+    {
+      "src": "/github/(.*)",
+      "dest": "/server/api/github.js","headers": {
+        "cache-control": "s-maxage=7200, stale-while-revalidate"
+      }
+      
+    },
+    {
+      "src": "/lastfm/(.*)",
+      "dest": "/server/api/lastfm.js","headers": {
+        "cache-control": "s-maxage=7200, stale-while-revalidate"
+      }
+      
+    },
+    {
+      "src": "/instagram/(.*)",
+      "dest": "/server/api/instagram.js","headers": {
+        "cache-control": "s-maxage=7200, stale-while-revalidate"
+      }
+      
+    }
+  ],
+  "env": {
+    "MONGODB_URI": "@mongodb_uri",
+    "SETUP_ENABLED": "@setup_enabled",
+    "TWITTER_INTEGRATION_DISABLED": "@twitter_integration_disabled",
+    "TWITTER_USERNAME": "jasperketone",
+    "TWITTER_CONSUMER_KEY": "@twitter_consumer_key",
+    "TWITTER_CONSUMER_SECRET": "@twitter_consumer_secret",
+    "TWITTER_ACCESS_TOKEN_KEY": "@twitter_access_token_key",
+    "TWITTER_ACCESS_TOKEN_SECRET": "@twitter_access_token_secret",
+    "TWITTER_UPDATE_FREQ_MINUTES": "360",
+    "INSTAGRAM_INTEGRATION_DISABLED": "false",
+    "INSTAGRAM_OAUTH_ENABLED": "true",
+    "INSTAGRAM_ACCESS_TOKEN": "@instagram_access_token",
+    "INSTAGRAM_CLIENT_ID": "@instagram_client_id",
+    "INSTAGRAM_CLIENT_SECRET": "@instagram_client_secret",
+    "INSTAGRAM_UPDATE_FREQ_MINUTES": "360",
+    "FOURSQUARE_INTEGRATION_DISABLED": "false",
+    "FOURSQUARE_OAUTH_ENABLED": "true",
+    "FOURSQUARE_CLIENT_ID": "@foursquare_client_id",
+    "FOURSQUARE_CLIENT_SECRET": "@foursquare_client_secret",
+    "FOURSQUARE_ACCESS_TOKEN": "@foursquare_access_token",
+    "FOURSQUARE_UPDATE_FREQ_MINUTES": "360",
+    "DRIBBBLE_INTEGRATION_DISABLED": "true",
+    "TUMBLR_INTEGRATION_DISABLED": "true",
+    "GITHUB_INTEGRATION_DISABLED": "false",
+    "GITHUB_OAUTH_ENABLED": "true",
+    "GITHUB_CLIENT_ID": "@github_client_id",
+    "GITHUB_CLIENT_SECRET": "@github_client_secret",
+    "GITHUB_ACCESS_TOKEN": "@github_access_token",
+    "GITHUB_USERNAME": "jake-101",
+    "GITHUB_UPDATE_FREQ_MINUTES": "720",
+    "LASTFM_INTEGRATION_DISABLED": "false",
+    "LASTFM_API_KEY": "@lastfm_api_key",
+    "LASTFM_USERNAME": "jasperketone",
+    "LASTFM_UPDATE_STREAM_FREQ_MINUTES": "720",
+    "LASTFM_UPDATE_FREQ_MINUTES": "60",
+    "YOUTUBE_INTEGRATION_DISABLED": "true"
+  }
+}
